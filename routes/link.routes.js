@@ -35,7 +35,7 @@ router.post('/generate', authMiddleware, async (req, res) => {
 router.get('/', authMiddleware, async (req, res) => {
     try {
         const links = await Link.find({owner: req.user.userId})
-        req.json(links)
+        res.json(links)
     } catch (e) {
         res.status(500).json({ message: "Что-то пошло не так", error: e.message })
     }
@@ -44,7 +44,7 @@ router.get('/', authMiddleware, async (req, res) => {
 router.get('/:id', authMiddleware, async (req, res) => {
     try {
         const link = await Link.findById(req.params.id)
-        req.json(link)
+        res.json(link)
     } catch (e) {
         res.status(500).json({ message: "Что-то пошло не так", error: e.message })
     }

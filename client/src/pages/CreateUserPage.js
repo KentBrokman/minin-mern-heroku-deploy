@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useHttp } from '../hooks/http.hook'
+import {useHistory} from 'react-router-dom'
 
 export const CreateUserPage = () => {
     const [link, setLink] = useState('')
     const { request } = useHttp()
     const auth = useContext(AuthContext)
+    const history = useHistory()
 
     useEffect(() => {
         window.M.updateTextFields()                  //Просто делает текстовые инпуты активными (materialize)
@@ -20,7 +22,7 @@ export const CreateUserPage = () => {
                     { from: link },
                     {Authorization: `Bearer ${auth.token}`}
                 )
-                console.log(data)
+                history.push(`/detail/${data.link._id}`)
             } catch (error) {
 
             }
