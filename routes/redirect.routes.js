@@ -8,8 +8,8 @@ router.get('/:code', async (req, res) => {
 
         if (link) {
             link.clicks++
-            link.save()
-            res.redirect(link.from)
+            await link.save()
+            return res.redirect(link.from)
         }
         res.status(401).json({message: "Ссылка не найдена"})
     } catch (e) {
